@@ -1,0 +1,110 @@
+<%
+if (!battle[2]) {
+	battle[2] = 1000;
+}
+if (!battle[5]) {
+	battle[5] = 1000;
+}
+
+%>
+<% var level, rank;
+rounds = String(rounds).trim();
+if (rounds == '0' || rounds == 'null') {
+	rounds = '0';
+	level = '0';
+	rank = 'New Guy';
+}
+if (rounds >= 1) {
+	level = '1';
+	rank = 'Lowly Peasant';
+}
+if (rounds >= 10) {
+	level = '2';
+        rank = 'Minor offender';
+}
+if (rounds >= 20) {
+                level = '3';
+                rank = 'Warrant Officer';
+}
+if (rounds >= 35) {
+                level = '4';
+                rank = 'Repeat offender';
+}
+if (rounds >= 60) {
+                level = '5';
+                rank = 'Epic';
+}
+if (rounds >= 100) {
+                level = '6';
+                rank = 'Mythic';
+}
+if (rounds >= 150) {
+                level = '7';
+                rank = 'Legendary';
+}
+if (rounds >= 300) {
+		level = '8';
+		rank = 'OLD MAN WINTER';
+} %>
+<div style="text-align: center; margin-top: 125px;" class="clearfix">
+<strong  style="color: #666; text-shadow: 1px 1px 0 #fff; font: 1.5em Georgia;">
+	<a name="fb_share"></a>
+	Who has the better mugshot?
+	<a href="http://twitter.com/share" class="twitter-share-button" data-text="Mugshot Wars! Great way to kill some time" data-count="horizontal" data-via="campedersen">Tweet</a>
+</strong><br /><br />
+<span style="color: #666; text-shadow: 1px 1px 0 #fff;">
+	Click on a mugshot or press &larr; or &rarr; on your keyboard to vote.
+</span><br /><br />
+<div style="float:right; width: 200px; margin-right: 20px; text-align: center;"><% if(previous) { %>
+ 	<a href="/details/<%- winner %>" class="voteBox" style="float: left;">
+                <img width="75" src="/images/mugshots/<%- previous[0] %>" /><br /><br />
+                @ <strong><%- previous[1] %></strong><br /><br />
+        </a>
+        <span style="position: relative; top: 75px; color: #666; text-shadow: 1px 1px 0 #fff; font: 0.8em Georgia;"><i>beat</i></span>
+        <a href="/details/<%- loser %>" class="voteBox" style="float: right;">
+                <img width="75" src="/images/mugshots/<%- previous[2] %>" /><br /><br />
+                @ <strong><%- previous[3] %></strong><br /><br />
+        </a>
+<% } %></div>
+<div style="width: 600px; margin: 0 auto; text-align: center;" class="clearfix">
+	<a id="left" href="/battled/<%- offense %>/<%- defense %>" class="voteBox" style="float: left; margin: 0;">
+		<img width="225" src="/images/mugshots/<%- battle[1] %>" /><br /><br />Offense<br /><br />
+		<!--<br /><br />Current rating: <strong><%- battle[2] %></strong><br /><br />-->
+	</a>
+	<span style="position: relative; top: 150px; color: #666; text-shadow: 1px 1px 0 #fff; font: 1.5em Georgia;"><i>vs</i></span>
+	<a id="right" href="/battled/<%- defense %>/<%- offense %>" class="voteBox" style="float: right;">
+		<img width="225" src="/images/mugshots/<%- battle[4] %>" /><br /><br />Defense<br /><br />
+		<!--<br /><br />Current rating: <strong><%- battle[5] %></strong><br /><br />-->
+	</a>
+</div>
+</div>
+<style>
+#madeby {
+	display: none;
+}
+</style>
+<script type="text/javascript">
+$(document).keyup(function(e){
+    if (e.keyCode == 37) { 
+	window.location.href = "/battled/<%- offense %>/<%- defense %>";
+        return false;
+    }
+    if (e.keyCode == 39) { 
+	window.location.href = "/battled/<%- defense %>/<%- offense %>";
+        return false;
+    }
+});
+</script>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+<div style="text-align: center; color: #666; text-shadow: 1px 1px 0 #fff; font: 1.5em Georgia; margin-top: 30px;">
+	<%- battles %> battles completed ~ only 1 king<br /><br />
+	<script type="text/javascript">
+		google_ad_client = "ca-pub-3255744172990964";
+		google_ad_slot = "0349321699";
+		google_ad_width = 728;
+		google_ad_height = 90;
+	</script>
+	<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>

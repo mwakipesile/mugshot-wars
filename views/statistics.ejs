@@ -1,0 +1,108 @@
+<script language="javascript" type="text/javascript" src="/js/jquery.flot.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
+<div id="wrapper" class="clearfix">
+<a name="fb_share" style="float: right;"></a>
+<strong style="font-size: 1.5em;">Statistics</strong><br />
+<p>
+	<strong>Total Battles</strong>: <span id="battles">Loading...</span>
+</p>
+<p>
+	<strong>Inmates Per Hour</strong>
+	<div id="hourlyGraph" style="width:970px;height:400px"></div>
+</p>
+<p>
+	<strong>Gender Split</strong> (All time)
+	<div id="genderGraph" style="width:970px;height:400px"></div>
+</p>
+<p>
+	<strong>Age Distribution</strong> (All time)
+	<div id="ageGraph" style="width:970px;height:400px"></div>
+</p>
+</div>
+<script id="source" language="javascript" type="text/javascript"> 
+$(function () {
+
+	$.get('/stats/battles', function(battles){
+		$("#battles").text(battles);
+	});
+
+	$.get('/stats/hourly', function(inmatesPerHour){
+		inmatesPerHour.shift();
+		var options = {
+			yaxis: {
+			    min: 95
+			},
+			xaxis: {
+			    mode: 'time',
+			    tickFormatter: function (val, axis) {
+			        var currentDate = new Date(parseInt(val));
+	        		var hours = currentDate.getHours();
+	        		var AorP=" ";
+	        		if (hours >= 12)
+	        		        AorP=" pm";
+	        		else
+	        		    	AorP=" am";
+	        		if (hours >= 13)
+	        		        hours -= 12;
+	        		if (hours == 0)
+	        		        hours = 12;
+				return hours + AorP;
+			    }
+			}
+		  };
+
+    		$.plot($("#hourlyGraph"), [
+    		    {
+    		        data: inmatesPerHour,
+			color: 'lightblue',
+			hoverable: true,
+			lines: { show: true, fill: true },
+        		}
+    		], options);
+	});
+
+	$.get('/stats/gender', function(genders){
+		var options = {
+			yaxis: {
+			},
+			xaxis: {
+				min: 1,
+				max: 6,
+				ticks: [[2,'Male'], [4,'Female']]
+			}
+		  };
+
+    		$.plot($("#genderGraph"), [
+    		    {
+    		        data: genders,
+			color: 'orange',
+			hoverable: true,
+			bars: { show: true, fill: true },
+        		}
+    		], options);
+	});
+
+	$.get('/stats/age', function(ages){
+		var options = {
+			yaxis: {
+			},
+			xaxis: {
+				min: -1,
+				max: 7,
+				ticks: [[0,'13-17'], [1,'18-24'], [2, '25-34'], [3, '35-44'], [4, '45-54'], [5, '55+']]
+			}
+		  };
+
+    		$.plot($("#ageGraph"), [
+    		    {
+    		        data: ages,
+			color: 'green',
+			hoverable: true,
+			bars: { show: true, fill: true },
+        		}
+    		], options);
+	});
+
+});
+</script>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>

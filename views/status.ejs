@@ -1,0 +1,176 @@
+<% var level, rank, image, decription, nextLevel, thisLevel;
+rounds = String(rounds).trim();
+if (rounds == '0' || rounds == 'null') {
+	rounds = '0';
+	level = '0';
+	thisLevel = 0;
+	nextLevel = '1';
+	rank = 'New Guy';
+	image = 'http://mugshotwars.com/images/mugshots/Photo287847width150.jpg';
+	description = 'You haven\'t been around long.';
+}
+if (rounds >= 1) {
+	level = '1';
+	thisLevel = 1;
+	nextLevel = '10';
+	rank = 'Lowly Peasant';
+	image = 'http://mugshotwars.com/images/mugshots/Photo275248width150.jpg';
+	description = 'You don\'t have a gold medal yet but you\'re getting there. Keep battling to climb the ranks.';
+}
+if (rounds >= 10) {
+	level = '2';
+	thisLevel = 10;
+	nextLevel = '20';
+        rank = 'Minor offender';
+	image = 'http://mugshotwars.com/images/mugshots/Photo287039width150.jpg';
+	description = 'You\'re almost an officer. People say you\'re the cat\'s meow.';
+}
+if (rounds >= 20) {
+        level = '3';
+	thisLevel = 20;
+	nextLevel = '35';
+        rank = 'Warrant Officer';
+	image = 'http://mugshotwars.com/images/mugshots/Photo236661width150.jpg';
+	description = 'You probably shouldn\'t quit your day job. But if you\'re unemployed, I\'m not stopping you.';
+}
+if (rounds >= 35) {
+        level = '4';
+	thisLevel = 35;
+	nextLevel = '60';
+        rank = 'Repeat Offender';
+	image = 'http://mugshotwars.com/images/mugshots/Photo283877width150.jpg';
+	description = 'You are a force of mugshot nature. You are unstoppable.';
+}
+if (rounds >= 60) {
+        level = '5';
+	thisLevel = 60;
+	nextLevel = '100';
+        rank = 'Epic';
+	image = 'http://mugshotwars.com/images/mugshots/Photo280030width150.jpg';
+	description = 'You must not have any homework. Not like it would matter...';
+}
+if (rounds >= 100) {
+        level = '6';
+	thisLevel = 1000;
+	nextLevel = '150';
+        rank = 'Mythic';
+	image = 'http://mugshotwars.com/images/mugshots/Photo285485width150.jpg';
+	description = 'You are a mugshot hero. We need more people like you around here.';
+}
+if (rounds >= 150) {
+        level = '7';
+	thisLevel = 150;
+	nextLevel = '300';
+        rank = 'Legendary';
+	image = 'http://mugshotwars.com/images/mugshots/Photo276821width150.jpg';
+	description = 'You transcend time and space. The people in the streets bow to you.';
+}
+if (rounds >= 300) {
+	level = '8';
+	thisLevel = 300;
+	nextLevel = '500';
+	rank = 'OLD MAN WINTER';
+	image = 'http://mugshotwars.com/images/mugshots/Photo212356width150.jpg';
+	description = 'You haven\'t gone outside in a couple of days. Nobody noticed.';
+}
+if (rounds >= 500) {
+	level = '9';
+	thisLevel = 500;
+	nextLevel = '1000';
+	rank = 'Greasy Combover';
+	image = 'http://mugshotwars.com/images/mugshots/weberutah_66593.jpg';
+	description = 'You forgot to brush your teeth. It\'s whatever.';
+}
+if (rounds >= 1000) {
+	level = '10';
+	thisLevel = 1000;
+	nextLevel = '2000';
+	rank = 'Obsessed';
+	image = 'http://mugshotwars.com/images/mugshots/hillsborough_07077783.jpg';
+	description = 'Your eyes have been glued to mugshots all day. You haven\'t even shat.';
+}
+if (rounds >= 2000) {
+	level = '11';
+	thisLevel = 2000;
+	nextLevel = '4000';
+	rank = 'The Brando';
+	image = 'http://mugshotwars.com/images/mugshots/seminole_15345.jpg';
+	description = 'You prey on mugshots. You deliver pizza in your CRX. ' +
+		'Your attitude and behaviour are questionable.';
+}
+if (rounds >= 4000) {
+	level = '12';
+	thisLevel = 4000;
+	nextLevel = '7000';
+	rank = 'Going Blind';
+	image = 'http://mugshotwars.com/images/mugshots/pinellas_1314689.jpg';
+	description = 'You have been staring at your screen so long your corneas have peeled off '
+		+ 'and your pupils are glazing over. Nothing serious though.';
+}
+if (rounds >= 7000) {
+	level = '13';
+	thisLevel = 7000;
+	nextLevel = '10000';
+	rank = 'Connoisseur';
+	image = 'http://mugshotwars.com/images/mugshots/cobb_859841.jpg';
+	description = 'Nobody within a 500 mile radius has a better taste in mugshots. '
+		+ 'You live and breathe this stuff, man.';
+}
+if (rounds >= 10000) {
+	level = '14';
+	thisLevel = 10000;
+	nextLevel = '20000';
+	rank = 'Cave Troll';
+	image = 'http://mugshotwars.com/images/mugshots/gwinnett_123781.jpg';
+	description = 'The eerie glow of mugshots emanating from your screen has darkened your '
+		+ 'complexion to the point of no return. Oh, and you fucking rock.';
+}
+
+var url = 'http://www.facebook.com/dialog/feed?app_id=104293636312207&'
+        + 'link=http://mugshotwars.com/&'
+        + 'picture=' + image + '&'
+        + 'name=Mugshot%20Wars&'
+        + 'caption=Level%20' + level + ':%20' + rank + '&'
+        + 'description=' + description + '&'
+        + 'message=I%20love%20this%20website.&'
+        + 'redirect_uri=http://mugshotwars.com/';
+var percent = ((rounds - thisLevel) / nextLevel) * 100 + 1;
+%>
+
+<div id="wrapper" class="clearfix">
+<!--<a class="button" href="/"><div class="buttonwrap">Continue battling &rarr;</div></a>-->
+<a class="button" href="<%- url %>"><div class="buttonwrap">Brag about it on Facebook (it's easy) &rarr;</div></a>
+
+<strong style="font-size: 2em;">My Status</strong> You've battled <%- rounds %> time<%- rounds > 1 || rounds == 0 ? 's' : '' %>.<br /><br />
+
+<% if (levelUp == true) { %><strong style="font-size: 1.3em; margin: 15px auto; color: green;">Level up!</strong><br /><% } %>
+
+<div style="margin-left: 150px; width: 600px;">
+<img style="float: left; margin-right: 15px;" src="<%- image %>" /><br />
+<div class="progress-container">  
+	<span id="progress_text"><%- rounds %> of <%- nextLevel %></span>
+	<div id="progress_bar" style="width: <%- percent %>%"></div>
+</div><br /><br />
+<strong style="font-size: 1.7em;">Level <%- level %></strong><br />
+<%- rank %><br /><br />
+<i><%- description %></i><br /><br />
+<a href="/">Continue &rarr;</a>
+</div>
+
+</div>
+
+<script type="text/javascript">
+/*
+$(document).keydown(function(e){
+    if (e.keyCode == 37) {
+        window.location.href = "/";
+        return false;
+    }
+    if (e.keyCode == 39) {
+        window.location.href = "/";
+        return false;
+    }
+});
+*/
+</script>
+

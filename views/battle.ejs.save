@@ -1,0 +1,71 @@
+<%
+if (!battle[2]) {
+	battle[2] = 1000;
+}
+if (!battle[5]) {
+	battle[5] = 1000;
+}
+
+%>
+<a class="button" href="/top"><div class="buttonwrap">View the leaderboard &rarr;</div></a>
+<!--<span style="float: right;">Which inmate has the better mugshot?</span>-->
+<% var level, rank;
+rounds = String(rounds).trim();
+if (rounds == '0' || rounds == 'null') {
+	rounds = '0';
+	level = '0';
+	rank = 'New Guy';
+}
+if (rounds >= 1) {
+	level = '1';
+	rank = 'Lowly Peasant';
+}
+if (rounds >= 10) {
+	level = '2';
+        rank = 'Minor offender';
+}
+if (rounds >= 20) {
+                level = '3';
+                rank = 'Warrant Officer';
+}
+if (rounds >= 35) {
+                level = '4';
+                rank = 'Repeat offender';
+}
+if (rounds >= 60) {
+                level = '5';
+                rank = 'Epic';
+}
+if (rounds >= 100) {
+                level = '6';
+                rank = 'Mythic';
+}
+if (rounds >= 150) {
+                level = '7';
+                rank = 'Legendary';
+}
+if (rounds >= 300) {
+		level = '8';
+		rank = 'OLD MAN WINTER';
+} %>
+<strong style="font-size: 2em; letter-spacing: 0.4em;">Mugshot Wars</strong><br /><br />
+<a style="float: right;" name="fb_share"></a> 
+Level <%- level %> (<a href="/status">My status &rarr;</a>)</p>
+<span style="float: left; position: relative; top: 180px; left: 490px;">vs</span>
+<div style="width:600px; text-align: center; margin: 30px 200px;">
+	<a href="/battled/<%- offense %>/<%- defense %>" class="inmate" style="width: 220px; height: 285px; float: left">
+		<img width="200" src="/images/mugshots/<%- battle[1] %>" /><br />
+		<%- battle[0] %>
+	</a>
+	<a href="/battled/<%- defense %>/<%- offense %>" class="inmate" style="width: 220px; height: 285px; float: right;">
+		<img width="200" src="/images/mugshots/<%- battle[4] %>" /><br />
+		<%- battle[3] %><br />
+	</a>
+<br /><br />
+<span style="float: left; padding-left: 50px;">Current rating: <strong><%- battle[2] %></strong></span>
+<span style="float: right; padding-right: 50px;">Current rating: <strong><%- battle[5] %></strong></span>
+</div>
+<script type="text/javascript">
+
+</script>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>

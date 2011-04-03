@@ -1,0 +1,15 @@
+<div id="wrapper" class="clearfix">
+<a class="button" href="/"><div class="buttonwrap">Start rating &rarr;</div></a>
+<strong style="font-size: 2em;">Top Mugshots by Ranking</strong>&nbsp;&nbsp;<a name="fb_share"></a><br />
+<div id="lineup">
+<% for (var i in bookings) {
+	var thisBooking = bookings[i];
+	if (!thisBooking[3]) {
+		thisBooking[3] = '1000';
+	} %>
+<a class="inmate" href="/details/<%- thisBooking[0] %>"><img width="150" src="/images/mugshots/<%- thisBooking[2] %>" /><br /><small>Rating: <%- thisBooking[3] 
+%></small></a>
+<% } %>
+</div>
+</div>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>

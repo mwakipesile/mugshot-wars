@@ -1,0 +1,104 @@
+<script type="text/javascript">
+var snapshots = [];
+var bookings = [];
+var snapshot;
+$(document).ready(function(){
+
+	$.get('/snapshots', function(data){
+		for (var i in data) {
+			snapshots.push(data[i]);
+		}
+		var count = snapshots.length;
+		$("#slider").slider({
+			min: 0,
+			max: count - 1,
+			value: count,
+			slide: slide,
+			stop: slideStop
+		});
+		var ui = { value: snapshots.length - 1 };
+		slide(null, ui);
+		slideStop(null, ui);
+	});
+	
+	$(".inmate").click(function(){
+		alert(this);
+	});
+	
+});
+
+var slide = function(event, ui) {
+	snapshot = snapshots[ui.value];
+	var currentDate = new Date(parseInt(snapshot));
+	var hours = currentDate.getHours();
+	var AorP=" ";
+	if (hours >= 12)
+		AorP=" P.M.";
+	else
+		AorP=" A.M.";
+	if (hours >= 13)
+		hours -= 12;
+	if (hours == 0)
+		hours = 12;
+		
+    $("#date").html('<h1>' + currentDate.toDateString() + '</h1>' + hours + AorP);
+}
+
+var slideStop = function(event, ui) {
+    $("#lineup").text('Loading inmate data...');
+    $.get('/snapshot/' + snapshot, function(data){
+    	bookings = [];
+    	for (var i in data) {
+		bookings[i] = data[i];
+    	}
+	render();
+    });
+}
+
+function render() {
+	$("#lineup").text('');
+	$("#count").text('');
+	$("#count").html('<h1>' + bookings.length + '</h1> inmates');
+	for (var i in bookings) {
+		var thisBooking = bookings[i];
+		//var thisVotes = thisBooking[8] ? thisBooking[8] : 0;
+		//var thisSpace = thisBooking[2].length > 19 ? '<br />' : '<br /><br />';
+		$("#lineup").append($('<a class="inmate" href="/details/' + thisBooking[5] + '"><img src="/images/mugshots/' + thisBooking[1] + '" /><br />' + thisBooking[2] + '</a>'));
+		//$("#lineup").append($('<div class="inmate"><a href="/details/' + thisBooking[5] + '"><img src="/images/mugshots/' + thisBooking[1] + '" /><br />' + thisBooking[2] + '</a>' + thisSpace +
+			//'<a href="javascript:vote(\'' + thisBooking[5]  + '\',\'up\')"><img src="/images/up.png" /></a> <span id="votes' + thisBooking[5] + '">' + thisVotes + '</span> <a href="javascript:vote(\'' + thisBooking[5]  + '\',\'down\')">' +
+			//'<img src="/images/down.png" /></a></div>'));
+	}
+}
+
+var voted = [];
+function vote(booking, direction) {
+	if (voted[booking] != direction) {
+		$('#votes' + booking).css('color','blue');
+		$.get('/vote/' + booking + '/' + direction, function(reply) {
+			$('#votes' + booking).text(reply);
+		});
+		voted[booking] = direction;
+	}
+}
+
+function showInmate(id) {
+	alert(id);
+}
+</script>
+
+<a class="button" href="/"><div class="buttonwrap">Start rating &rarr;</div></a>
+
+<div style="font-size: 0.9em; margin: 5px 0 25px 20px; background: #feffb6; padding: 10px;">
+Use the slider below to explore the archives. Click on a mugshot to see inmate details. <a name="fb_share"></a> 
+</div>
+    <div id="slider"></div>
+    <div id="info">
+	    <div id="search">
+	    </div>
+	    <div id="date"></div>
+	    <div id="count"></div>
+	</div>
+    <div id="lineup">
+		<span style="padding: 20px;">Loading current roster...</span>
+    </div>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>

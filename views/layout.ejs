@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+	<title>Mugshot Wars | <%- title %></title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<meta name="description" content="Battle inmates from all over the world. Crown the mugshot king.">
+	<meta property="og:title" content="Mugshot Wars" /> 
+	<meta property="og:description" content="Battle inmates from all over the world. Crown the mugshot king." /> 
+	<meta property="og:image" content="http://mugshotwars.com/images/mugshots/putnam_54548.jpg" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#logo").hover(function(){ $(this).attr('src','/images/logo_hover.png'); }, function() { $(this).attr('src','/images/logo.png'); });
+});
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5208661-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+</head>
+<body>
+
+<div id="headwrap">
+    <div id="header">
+    	<a href="/">
+	    <img src="/images/logo.png" id="logo" alt="Brainerd Custody" />
+    	</a>
+	<ul id="navigation">
+	    <li><a href="/">Battle</a></li>
+	    <li><a href="/top">Leaders</a></li>
+	    <li><a href="/status">Status</a></li>
+	    <li><a href="/about">About</a></li>
+    	</ul>
+    </div>
+</div>
+
+<%- body %>
+
+<div id="footer">
+    <span id="madeby"><a href="http://campedersen.com/">Made by Oak</a></span>
+</div>
+
+
+<script type="text/javascript">
+var _sf_async_config={uid:17172,domain:"mugshotwars.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+</script>
+<script type="text/javascript">
+var uservoiceOptions = {
+  /* required */
+  key: 'mugshotwars',
+  host: 'mugshotwars.uservoice.com', 
+  forum: '97787',
+  showTab: true,  
+  /* optional */
+  alignment: 'left',
+  background_color:'#f00', 
+  text_color: 'white',
+  hover_color: '#06C',
+  lang: 'en'
+};
+
+function _loadUserVoice() {
+  var s = document.createElement('script');
+  s.setAttribute('type', 'text/javascript');
+  s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+  document.getElementsByTagName('head')[0].appendChild(s);
+}
+_loadSuper = window.onload;
+window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+</script>
+</body>
+</html>
